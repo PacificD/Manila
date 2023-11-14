@@ -1,4 +1,4 @@
-import { ElementRef, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, ElementRef, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 export const RepresentTab = {
@@ -18,6 +18,10 @@ const useP2P = () => {
   const [answerSdp, setAnswerSdp] = useState('')
   const [offerSdpFromCaller, setOfferSdpFromCaller] = useState('')
   const [answerSdpFromCallee, setAnserSdpFromCallee] = useState('')
+  const handleOfferSdpFromCallerChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setOfferSdpFromCaller(e.currentTarget.value)
+  const handleAnswerSdpFromCalleeChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setAnserSdpFromCallee(e.currentTarget.value)
 
   const [representTab, setRepresentTab] = useState<RepresentTab>(
     RepresentTab.CALLER
@@ -30,7 +34,7 @@ const useP2P = () => {
     })
     const pc = peerConnectionRef.current
     if (!pc) toast.error('Something went wrong!')
-    localStream.current = await navigator.mediaDevices.getUserMedia({
+    localStream.current = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: false
     })
@@ -62,7 +66,7 @@ const useP2P = () => {
   const createAnswer = async () => {
     const pc = peerConnectionRef.current
     if (!pc) {
-      toast.error('PeerConnection not established!')
+      toast.error('PeerConnection is not established!')
       return
     }
     const offer = JSON.parse(offerSdpFromCaller)
@@ -99,7 +103,13 @@ const useP2P = () => {
     activeRepresentTab,
     offerSdp,
     answerSdp,
-    createOffer
+    createOffer,
+    createAnswer,
+    offerSdpFromCaller,
+    handleOfferSdpFromCallerChange,
+    answerSdpFromCallee,
+    handleAnswerSdpFromCalleeChange,
+    addAnswer
   }
 }
 
