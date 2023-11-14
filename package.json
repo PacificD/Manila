@@ -25,6 +25,7 @@
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "vite-plugin-mkcert": "^1.16.0",
+    "webrtc-adapter": "^8.2.3",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
