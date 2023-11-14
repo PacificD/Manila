@@ -7,7 +7,7 @@ const NotFound: FC = () => {
     <div className='flex flex-col items-center w-full h-full py-12'>
       <div>NotFound</div>
       <Button asChild>
-        <Link to='/'>back to homeScreen</Link>
+        <Link to='/home'>back to homeScreen</Link>
       </Button>
     </div>
   )

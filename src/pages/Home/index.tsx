@@ -24,6 +24,10 @@ const Home: FC = () => {
       </span>
       <section className='mt-4'>
         <main className='flex flex-col items-center'>
+          <Link to={'/'} className='my-2'>
+            <Button>/</Button>
+          </Link>
+
           {routeList.map(route => (
             <Link id={route} to={route} key={route} className='my-2'>
               <Button>/ {route.slice(1)}</Button>

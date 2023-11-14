@@ -1,4 +1,4 @@
-import { NotFound, Home } from '@/pages'
+import { NotFound, Home, P2P } from '@/pages'
 import { lazy, Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 
@@ -8,6 +8,10 @@ const RecordScreen = lazy(() => import('@/pages/RecordScreen')),
 export const routes = [
   {
     path: '/',
+    element: <P2P />
+  },
+  {
+    path: '/home',
     element: <Home />
   },
   {

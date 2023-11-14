@@ -8,7 +8,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', '@typescript-eslint'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -16,7 +16,7 @@ module.exports = {
     ],
     'prettier/prettier': 0,
     semi: [2, 'never'],
-    'no-unused-vars': 1,
+    'no-unused-vars': 0,
     quotes: 0,
     'comma-dangle': [2, 'never'],
     'no-unused-expressions': [
@@ -25,6 +25,7 @@ module.exports = {
         allowShortCircuit: true,
         allowTernary: true
       }
-    ]
+    ],
+    '@typescript-eslint/no-unused-vars': 0
   }
 }
