@@ -23,6 +23,7 @@
     "sonner": "^1.2.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-mkcert": "^1.16.0",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
