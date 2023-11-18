@@ -11,6 +11,7 @@
     "ui:add": "pnpm dlx shadcn-ui@latest add"
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
@@ -18,6 +19,7 @@
     "clsx": "^2.0.0",
     "gsap": "^3.12.2",
     "lucide-react": "^0.292.0",
+    "next-theme": "^0.1.5",
     "peerjs": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
