@@ -1,4 +1,4 @@
-import { ChangeEvent, ElementRef, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, ElementRef, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 export const RepresentTab = {
@@ -92,11 +92,9 @@ const useP2P = () => {
     }
   }
 
-  useEffect(() => {
-    init()
-  }, [])
 
   return {
+    init,
     localVideoRef,
     remoteVideoRef,
     representTab,
