@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useMemo, useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -7,11 +8,18 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import useP2P, { RepresentTab } from './useP2P'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CopyButton } from '@/components/copy-button'
 import { Input } from '@/components/ui/input'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from "@/components/ui/tooltip"
+import { Switch } from '@/components/ui/switch'
 import { cn } from '@/lib/utils'
+import useP2P, { RepresentTab } from './useP2P'
+
 
 const P2P: FC = () => {
   const {
@@ -30,7 +38,9 @@ const P2P: FC = () => {
     handleAnswerSdpFromCalleeChange,
     addAnswer,
     msgList,
-    sendMsg
+    sendMsg,
+    mediaStreamRecordType,
+    toggleMediaStreamRecordType
   } = useP2P()
 
   const [msgInput, setMsgInput] = useState('')
@@ -139,6 +149,14 @@ const P2P: FC = () => {
           </CardContent>
           <CardFooter className='flex items-center justify-around'>
             <Button className='font-bold' onClick={init}>Start</Button>
+            <Tooltip>
+              <TooltipTrigger>
+                <Switch checked={mediaStreamRecordType === 'display'} onCheckedChange={toggleMediaStreamRecordType} />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>MediaStreamRecordType: {mediaStreamRecordType}</p>
+              </TooltipContent>
+            </Tooltip>
             <Button variant='outline' className='font-bold'>Puase</Button>
           </CardFooter>
         </Card>

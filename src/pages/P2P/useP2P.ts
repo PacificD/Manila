@@ -13,6 +13,13 @@ export const RepresentTab = {
 
 type RepresentTab = (typeof RepresentTab)[keyof typeof RepresentTab]
 
+export const MediaStreamRecordType = {
+  USER: 'user',
+  DISPLAY: 'display'
+} as const
+
+type MediaStreamRecordType = (typeof MediaStreamRecordType)[keyof typeof MediaStreamRecordType]
+
 const useP2P = () => {
   const peerConnectionRef = useRef<RTCPeerConnection>()
   const dataCannelRef = useRef<RTCDataChannel>()
@@ -34,6 +41,9 @@ const useP2P = () => {
   )
   const activeRepresentTab = (v: RepresentTab) => setRepresentTab(v)
 
+  const [mediaStreamRecordType, setMediaStreamRecordType] = useState<MediaStreamRecordType>('display')
+  const toggleMediaStreamRecordType = () => setMediaStreamRecordType(mediaStreamRecordType => mediaStreamRecordType === 'display' ? 'user' : 'display')
+
   const init = async () => {
     peerConnectionRef.current = new RTCPeerConnection({
       iceServers: [{ urls: 'stun:stun.voipbuster.com ' }]
@@ -49,10 +59,12 @@ const useP2P = () => {
     dataCannelRef.current = dataCannel
 
     // set local video stream
-    localStream.current = await navigator.mediaDevices.getDisplayMedia({
+    const mediaStreamOptions: MediaStreamConstraints = {
       video: true,
       audio: false
-    })
+    }
+    localStream.current = await (mediaStreamRecordType === 'display' ? navigator.mediaDevices.getDisplayMedia(mediaStreamOptions)
+      : navigator.mediaDevices.getUserMedia(mediaStreamOptions))
     localVideoRef.current!.srcObject = localStream.current
     localStream.current.getTracks().forEach(track => {
       pc.addTrack(track, localStream.current as MediaStream)
@@ -152,7 +164,9 @@ const useP2P = () => {
     handleAnswerSdpFromCalleeChange,
     addAnswer,
     msgList,
-    sendMsg
+    sendMsg,
+    mediaStreamRecordType,
+    toggleMediaStreamRecordType
   }
 }
 

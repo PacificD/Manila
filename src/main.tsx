@@ -8,16 +8,21 @@ import RouteElement from './routes'
 import './index.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import Menu from '@/components/menu'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
+
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <div className='relative'>
-          <Menu />
-          <RouteElement />
-          <Toaster position='top-center' richColors />
-        </div>
+        <TooltipProvider>
+          <div className='relative'>
+            <Menu />
+            <RouteElement />
+            <Toaster position='top-center' richColors />
+          </div>
+
+        </TooltipProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
