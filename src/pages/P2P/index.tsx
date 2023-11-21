@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { ChangeEvent, FC, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -11,6 +11,7 @@ import useP2P, { RepresentTab } from './useP2P'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CopyButton } from '@/components/copy-button'
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
 const P2P: FC = () => {
   const {
@@ -27,8 +28,18 @@ const P2P: FC = () => {
     handleOfferSdpFromCallerChange,
     answerSdpFromCallee,
     handleAnswerSdpFromCalleeChange,
-    addAnswer
+    addAnswer,
+    msgList,
+    sendMsg
   } = useP2P()
+
+  const [msgInput, setMsgInput] = useState('')
+  const handleMsgInputChange = (e: ChangeEvent<HTMLInputElement>) => setMsgInput(e.currentTarget.value)
+
+  const handleSendMsg = () => {
+    sendMsg(msgInput)
+    setMsgInput('')
+  }
 
   return (
     <div className='flex flex-row gap-12 p-4 h-screen max-h-screen justify-between'>
@@ -41,7 +52,7 @@ const P2P: FC = () => {
           <video ref={remoteVideoRef} autoPlay muted controls className='w-full h-full' />
         </CardContent>
       </Card>
-      <div className='flex flex-col items-center justify-between w-72 h-full'>
+      <div className='flex flex-col items-center gap-4 w-72 h-full'>
         <Tabs value={representTab} className='w-full grow'>
           <TabsList className='w-full'>
             {Object.entries(RepresentTab).map(([k, v]) => (
@@ -102,8 +113,24 @@ const P2P: FC = () => {
             </Card>
           </TabsContent>
         </Tabs>
+        {/* Chat List */}
+        <Card id='chat-list' className='w-full'>
+          <CardHeader>
+            <CardTitle className='text-center'>Chat List</CardTitle>
+          </CardHeader>
+          <CardContent className='w-full max-h-32 overflow-y-scroll'>
+            {msgList.map((msg, idx) => <div id={idx + msg.type + msg.content} className='pb-3'>
+              <span className={cn('rounded-md py-1 px-2 text-[10px] text-gray-600', msg.type === 'local' ? 'bg-teal-200' : 'bg-yellow-200')}>{msg.type}</span>
+              <span className='ml-3'>{msg.content}</span>
+            </div>)}
+          </CardContent>
+          <CardFooter className='flex items-center justify-between gap-2'>
+            <Input value={msgInput} onChange={handleMsgInputChange} />
+            <Button onClick={handleSendMsg}>Send</Button>
+          </CardFooter>
+        </Card>
         {/* local stream */}
-        <Card id='local-stream-container w-full'>
+        <Card id='local-stream-container' className='w-full'>
           <CardHeader>
             <CardTitle className='text-center'>Local Stream</CardTitle>
           </CardHeader>

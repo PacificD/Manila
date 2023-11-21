@@ -1,5 +1,10 @@
-import { ChangeEvent, ElementRef, useRef, useState } from 'react'
+import { ChangeEvent, ElementRef, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
+
+export interface IMsg {
+  type: 'local' | 'remote'
+  content: string
+}
 
 export const RepresentTab = {
   CALLER: 'caller',
@@ -10,10 +15,11 @@ type RepresentTab = (typeof RepresentTab)[keyof typeof RepresentTab]
 
 const useP2P = () => {
   const peerConnectionRef = useRef<RTCPeerConnection>()
+  const dataCannelRef = useRef<RTCDataChannel>()
   const localVideoRef = useRef<ElementRef<'video'>>(null)
   const remoteVideoRef = useRef<ElementRef<'video'>>(null)
   const localStream = useRef<MediaStream | null>(null)
-  const remoteStream = useRef<MediaStream | null>(null)
+  const [msgList, setMsgList] = useState<IMsg[]>([])
   const [offerSdp, setOfferSdp] = useState('')
   const [answerSdp, setAnswerSdp] = useState('')
   const [offerSdpFromCaller, setOfferSdpFromCaller] = useState('')
@@ -34,6 +40,15 @@ const useP2P = () => {
     })
     const pc = peerConnectionRef.current
     if (!pc) toast.error('Something went wrong!')
+
+    // create RTCDataChannel
+    const dataCannel = pc.createDataChannel('chatList', {
+      negotiated: true,
+      id: 0
+    })
+    dataCannelRef.current = dataCannel
+
+    // set local video stream
     localStream.current = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: false
@@ -92,6 +107,34 @@ const useP2P = () => {
     }
   }
 
+  const sendMsg = (content: string) => {
+    const msg: IMsg = {
+      type: 'local',
+      content
+    }
+    dataCannelRef.current?.send(JSON.stringify(msg))
+    setMsgList(msgList => [...msgList, msg])
+  }
+
+  useEffect(() => {
+    if (dataCannelRef.current) {
+      dataCannelRef.current.onopen = (e) => {
+        console.log('🚀 RTCDataChannel onopen, ', e)
+      }
+
+      dataCannelRef.current.onerror = (e) => {
+        toast.error('RTCDataChannel error occur!')
+        console.error(e)
+      }
+
+      dataCannelRef.current.onmessage = (e) => {
+        e.data && setMsgList(msgList => [...msgList, {
+          type: 'remote',
+          content: JSON.parse(e.data)?.content || ''
+        }])
+      }
+    } else toast.error('RTCDataChannel closed!')
+  }, [dataCannelRef.current])
 
   return {
     init,
@@ -107,7 +150,9 @@ const useP2P = () => {
     handleOfferSdpFromCallerChange,
     answerSdpFromCallee,
     handleAnswerSdpFromCalleeChange,
-    addAnswer
+    addAnswer,
+    msgList,
+    sendMsg
   }
 }
 
