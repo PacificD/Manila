@@ -3,7 +3,13 @@ import useSnowflakes from './useSnowflakes'
 
 const Snowflakes: FC = () => {
   const container = useRef<HTMLDivElement | null>(null)
-  useSnowflakes({ container, count: 100 })
+  useSnowflakes({
+    container,
+    count: 160,
+    configOptions: {
+      r: 1.2 + Math.random() * 2
+    }
+  })
 
   return (
     <section
