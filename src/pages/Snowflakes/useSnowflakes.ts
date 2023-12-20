@@ -48,6 +48,15 @@ interface IProps {
   configOptions?: SnowflakeConfigOptions
 }
 
+/**
+ * Custom React Hook for creating a snowfall animation effect.
+ *
+ * @param {number} count - Number of snowflakes to render. The default value is 300.
+ * @param {MutableRefObject} container - Ref object for the container where snowflakes will be rendered.
+ * @param {SnowflakeConfigOptions} configOptions - Additional configuration options for individual snowflakes.
+ *
+ * @returns {void}
+ */
 const useSnowflakes = ({ count = 300, container, configOptions }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
