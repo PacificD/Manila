@@ -26,6 +26,7 @@ module.exports = {
         allowTernary: true
       }
     ],
-    '@typescript-eslint/no-unused-vars': 0
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-unnecessary-type-constraint': 1
   }
 }

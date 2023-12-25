@@ -79,6 +79,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.7
     version: registry.npmmirror.com/@types/react-dom@18.2.14
+  '@types/sharedworker':
+    specifier: ^0.0.110
+    version: registry.npmmirror.com/@types/sharedworker@0.0.110
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: registry.npmmirror.com/@typescript-eslint/eslint-plugin@6.10.0(@typescript-eslint/parser@6.10.0)(eslint@8.53.0)(typescript@5.2.2)
@@ -2157,6 +2160,12 @@ packages:
     resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/@types/semver/-/semver-7.5.4.tgz}
     name: '@types/semver'
     version: 7.5.4
+    dev: true
+
+  registry.npmmirror.com/@types/sharedworker@0.0.110:
+    resolution: {integrity: sha512-TN6ird5VbAD6Pbneds/xL209Gfnp1hU9ZZ71ia1gtw4YnYuGXnsjYyUQz2ZsjPLi6nVz15//v9cSvpB7x2TxfQ==, tarball: https://registry.npmmirror.com/@types/sharedworker/-/sharedworker-0.0.110.tgz}
+    name: '@types/sharedworker'
+    version: 0.0.110
     dev: true
 
   registry.npmmirror.com/@typescript-eslint/eslint-plugin@6.10.0(@typescript-eslint/parser@6.10.0)(eslint@8.53.0)(typescript@5.2.2):
