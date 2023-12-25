@@ -4,7 +4,8 @@ import { useRoutes } from 'react-router-dom'
 
 const RecordScreen = lazy(() => import('@/pages/RecordScreen')),
   GSAP = lazy(() => import('@/pages/GSAP')),
-  Snowflakes = lazy(() => import('@/pages/Snowflakes'))
+  Snowflakes = lazy(() => import('@/pages/Snowflakes')),
+  SharedWorker = lazy(() => import('@/pages/SharedWorker'))
 
 export const routes = [
   {
@@ -37,9 +38,19 @@ export const routes = [
   },
   {
     path: '/snowflakes',
-    element: <Suspense>
-      <Snowflakes />
-    </Suspense>
+    element: (
+      <Suspense>
+        <Snowflakes />
+      </Suspense>
+    )
+  },
+  {
+    path: '/shared-worker',
+    element: (
+      <Suspense>
+        <SharedWorker />
+      </Suspense>
+    )
   }
 ]
 
