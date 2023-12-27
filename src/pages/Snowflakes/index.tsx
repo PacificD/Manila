@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react'
-import useSnowflakes from './useSnowflakes'
+import { useSnowflakes } from '@pacificd/hooks'
 
 const Snowflakes: FC = () => {
   const container = useRef<HTMLDivElement | null>(null)

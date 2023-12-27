@@ -3,7 +3,6 @@ import { lazy, Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 
 const RecordScreen = lazy(() => import('@/pages/RecordScreen')),
-  GSAP = lazy(() => import('@/pages/GSAP')),
   Snowflakes = lazy(() => import('@/pages/Snowflakes')),
   SharedWorker = lazy(() => import('@/pages/SharedWorker'))
 
@@ -25,14 +24,6 @@ export const routes = [
     element: (
       <Suspense>
         <RecordScreen />
-      </Suspense>
-    )
-  },
-  {
-    path: '/motion',
-    element: (
-      <Suspense>
-        <GSAP />
       </Suspense>
     )
   },
