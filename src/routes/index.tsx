@@ -1,10 +1,7 @@
 import { NotFound, Home, P2P } from '@/pages'
 import { lazy, Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
-
-const RecordScreen = lazy(() => import('@/pages/RecordScreen')),
-  Snowflakes = lazy(() => import('@/pages/Snowflakes')),
-  SharedWorker = lazy(() => import('@/pages/SharedWorker'))
+import lazyRoute from './lazy-route'
 
 export const routes = [
   {
@@ -21,27 +18,15 @@ export const routes = [
   },
   {
     path: '/record-screen',
-    element: (
-      <Suspense>
-        <RecordScreen />
-      </Suspense>
-    )
+    element: lazyRoute(lazy(() => import('@/pages/RecordScreen')))
   },
   {
     path: '/snowflakes',
-    element: (
-      <Suspense>
-        <Snowflakes />
-      </Suspense>
-    )
+    element: lazyRoute(lazy(() => import('@/pages/Snowflakes')))
   },
   {
     path: '/shared-worker',
-    element: (
-      <Suspense>
-        <SharedWorker />
-      </Suspense>
-    )
+    element: lazyRoute(lazy(() => import('@/pages/SharedWorker')))
   }
 ]
 
