@@ -1,5 +1,5 @@
 import { NotFound, Home, P2P } from '@/pages'
-import { lazy, Suspense } from 'react'
+import { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import lazyRoute from './lazy-route'
 
@@ -27,6 +27,10 @@ export const routes = [
   {
     path: '/shared-worker',
     element: lazyRoute(lazy(() => import('@/pages/SharedWorker')))
+  },
+  {
+    path: '/react-dom',
+    element: lazyRoute(lazy(() => import('@/pages/ReactDOM')))
   }
 ]
 
