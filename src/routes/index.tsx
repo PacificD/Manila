@@ -31,6 +31,10 @@ export const routes = [
   {
     path: '/react-dom',
     element: lazyRoute(lazy(() => import('@/pages/ReactDOM')))
+  },
+  {
+    path: '/process-graph',
+    element: lazyRoute(lazy(() => import('@/pages/ProcessGraph')))
   }
 ]
 
