@@ -1,4 +1,4 @@
-import { NotFound, Home, P2P } from '@/pages'
+import { NotFound, Home, Motion } from '@/pages'
 import { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import lazyRoute from './lazy-route'
@@ -6,40 +6,40 @@ import lazyRoute from './lazy-route'
 export const routes = [
   {
     path: '/',
-    element: <P2P />
+    element: <Motion />
   },
-  {
-    path: '/home',
-    element: <Home />
-  },
+  // {
+  //   path: '/home',
+  //   element: <Home />
+  // },
   {
     path: '*',
     element: <NotFound />
-  },
-  {
-    path: '/record-screen',
-    element: lazyRoute(lazy(() => import('@/pages/RecordScreen')))
-  },
-  {
-    path: '/snowflakes',
-    element: lazyRoute(lazy(() => import('@/pages/Snowflakes')))
-  },
-  {
-    path: '/shared-worker',
-    element: lazyRoute(lazy(() => import('@/pages/SharedWorker')))
-  },
-  {
-    path: '/react-dom',
-    element: lazyRoute(lazy(() => import('@/pages/ReactDOM')))
-  },
-   {
-    path: '/motion',
-    element: lazyRoute(lazy(() => import('@/pages/Motion')))
-  },
-  {
-    path: '/process-graph',
-    element: lazyRoute(lazy(() => import('@/pages/ProcessGraph')))
   }
+  // {
+  //   path: '/record-screen',
+  //   element: lazyRoute(lazy(() => import('@/pages/RecordScreen')))
+  // },
+  // {
+  //   path: '/snowflakes',
+  //   element: lazyRoute(lazy(() => import('@/pages/Snowflakes')))
+  // },
+  // {
+  //   path: '/shared-worker',
+  //   element: lazyRoute(lazy(() => import('@/pages/SharedWorker')))
+  // },
+  // {
+  //   path: '/react-dom',
+  //   element: lazyRoute(lazy(() => import('@/pages/ReactDOM')))
+  // },
+  //  {
+  //   path: '/motion',
+  //   element: lazyRoute(lazy(() => import('@/pages/Motion')))
+  // },
+  // {
+  //   path: '/process-graph',
+  //   element: lazyRoute(lazy(() => import('@/pages/ProcessGraph')))
+  // }
 ]
 
 const RouteElement: React.FC = () => useRoutes(routes)
